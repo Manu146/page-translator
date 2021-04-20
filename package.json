@@ -1,0 +1,17 @@
+{
+  "name": "page-translator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "esbuild ./dist/index.js --bundle --outfile=bundle.js"
+  },
+  "author": "Manu146",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "esbuild": "^0.11.12"
+  }
+}
