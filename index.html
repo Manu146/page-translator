@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
     <title>Document</title>
   </head>
   <body>
@@ -12,9 +18,10 @@
       <p id="paragraph1"></p>
       <p id="paragraph2"></p>
     </div>
-    <button class="language-btn" value="en">en</button
-    ><button class="language-btn" value="es">es</button
-    ><button class="language-btn" value="pt">pt</button>
+    <div id="language-selector">
+      <span class="selected-language" id="selected-language"></span>
+      <ul class="language-dropdown" id="dropdown"></ul>
+    </div>
     <script src="./bundle.js"></script>
   </body>
 </html>

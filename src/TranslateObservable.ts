@@ -3,7 +3,11 @@ import Observer from "./Observer";
 
 export default class TranslateObservable implements Observable {
   private subscribers: Observer[] = [];
-  private language: string = "es";
+  private language: string = "";
+
+  constructor(language: string) {
+    this.language = language;
+  }
 
   attach(o: Observer) {
     this.subscribers.push(o);

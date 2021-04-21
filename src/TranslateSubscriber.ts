@@ -23,7 +23,6 @@ export default class TranslateSubscriber implements Observer {
     this.translations = translations;
   }
   update() {
-    console.log("language changed");
     this.element.innerHTML = this.translations[
       (this.observable as TranslateObservable).getLanguage()
     ];

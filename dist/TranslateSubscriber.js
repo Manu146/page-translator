@@ -7,7 +7,6 @@ class TranslateSubscriber {
         this.translations = translations;
     }
     update() {
-        console.log("language changed");
         this.element.innerHTML = this.translations[this.observable.getLanguage()];
     }
 }

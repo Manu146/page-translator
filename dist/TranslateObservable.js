@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class TranslateObservable {
-    constructor() {
+    constructor(language) {
         this.subscribers = [];
-        this.language = "es";
+        this.language = "";
+        this.language = language;
     }
     attach(o) {
         this.subscribers.push(o);
