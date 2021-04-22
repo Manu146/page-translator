@@ -19,12 +19,23 @@ export default class LanguageSelector implements Observer {
   }
 
   update() {
-    this.element.innerHTML = (this
-      .observable as TranslateObservable).getLanguage();
+    let selected = (this.observable as TranslateObservable).getLanguage();
+    this.element.innerHTML = selected;
+    let buttons: HTMLCollection = document.getElementsByClassName(
+      "language-btn"
+    );
+    Array.from(buttons).forEach((button) => {
+      if ((button as HTMLButtonElement).value === selected)
+        button.classList.add("hidden");
+      else if (button.classList.contains("hidden")) {
+        button.classList.remove("hidden");
+      }
+    });
   }
 
   renderOptions() {
     let list = document.getElementById("dropdown");
+
     this.languages.forEach((language) => {
       let listElement = document.createElement("li");
       let button = document.createElement("button");

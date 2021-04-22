@@ -84,7 +84,16 @@
         this.renderOptions();
       }
       update() {
-        this.element.innerHTML = this.observable.getLanguage();
+        let selected = this.observable.getLanguage();
+        this.element.innerHTML = selected;
+        let buttons = document.getElementsByClassName("language-btn");
+        Array.from(buttons).forEach((button) => {
+          if (button.value === selected)
+            button.classList.add("hidden");
+          else if (button.classList.contains("hidden")) {
+            button.classList.remove("hidden");
+          }
+        });
       }
       renderOptions() {
         let list = document.getElementById("dropdown");
