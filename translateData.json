@@ -1,0 +1,14 @@
+{
+  "title": {
+    "en_US": "Hello world",
+    "es_ES": "Hola mundo"
+  },
+  "paragraph1": {
+    "en_US": "This example is using page-translator.",
+    "es_ES": "Este ejemplo esta utilizando page-translator."
+  },
+  "paragraph2": {
+    "en_US": "Test one",
+    "es_ES": "Prueba uno"
+  }
+}

@@ -7,7 +7,8 @@ class TranslateSubscriber {
         this.translations = translations;
     }
     update() {
-        this.element.innerHTML = this.translations[this.observable.getLanguage()];
+        this.element.innerHTML =
+            this.translations[this.observable.getLanguage()];
     }
 }
 exports.default = TranslateSubscriber;

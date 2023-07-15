@@ -1,13 +1,7 @@
 import Observable from "./Observable";
 import Observer from "./Observer";
 import TranslateObservable from "./TranslateObservable";
-
-interface Translations {
-  en: string;
-  es: string;
-  pt: string;
-  [key: string]: any;
-}
+import { Translations } from "./types";
 
 export default class TranslateSubscriber implements Observer {
   private observable: Observable;
@@ -23,8 +17,7 @@ export default class TranslateSubscriber implements Observer {
     this.translations = translations;
   }
   update() {
-    this.element.innerHTML = this.translations[
-      (this.observable as TranslateObservable).getLanguage()
-    ];
+    this.element.innerHTML =
+      this.translations[(this.observable as TranslateObservable).getLanguage()];
   }
 }

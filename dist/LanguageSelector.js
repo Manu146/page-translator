@@ -5,12 +5,12 @@ class LanguageSelector {
         this.observable = observable;
         this.element = element;
         this.languages = languages;
-        this.update();
         this.renderOptions();
+        this.update();
     }
     update() {
         let selected = this.observable.getLanguage();
-        this.element.innerHTML = selected;
+        this.element.innerHTML = selected.slice(0, 2);
         let buttons = document.getElementsByClassName("language-btn");
         Array.from(buttons).forEach((button) => {
             if (button.value === selected)
@@ -21,16 +21,23 @@ class LanguageSelector {
         });
     }
     renderOptions() {
-        let list = document.getElementById("dropdown");
-        this.languages.forEach((language) => {
-            let listElement = document.createElement("li");
-            let button = document.createElement("button");
-            button.classList.add("language-btn");
-            button.value = language;
-            button.innerHTML = language;
-            listElement === null || listElement === void 0 ? void 0 : listElement.appendChild(button);
-            list === null || list === void 0 ? void 0 : list.appendChild(listElement);
-        });
+        const list = document.getElementById("dropdown");
+        if (list != null && list instanceof HTMLElement) {
+            this.languages.forEach((language) => {
+                let listElement = document.createElement("li");
+                let button = document.createElement("button");
+                button.classList.add("language-btn");
+                button.value = language;
+                button.innerHTML = language.slice(0, 2);
+                button.addEventListener("click", (e) => {
+                    if (e.target) {
+                        this.observable.changeLanguage(e.target.value);
+                    }
+                });
+                listElement.appendChild(button);
+                list.appendChild(listElement);
+            });
+        }
     }
 }
 exports.default = LanguageSelector;

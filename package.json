@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild ./dist/index.js --bundle --outfile=bundle.js"
+    "prebuild": "tsc --build",
+    "build": "esbuild ./dist/index.js --bundle --outfile=./lib/bundle.js",
+    "buildExample": "esbuild scripts.js --bundle --minify --outfile=out.js"
   },
   "author": "Manu146",
   "license": "ISC",

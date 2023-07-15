@@ -1,40 +1,40 @@
 import TranslateObservable from "./TranslateObservable";
 import TranslateSubscriber from "./TranslateSubscriber";
-import translateData from "./translateData.json";
 import LanguageSelector from "./LanguageSelector";
-import languages from "./languages.json";
+import { Language, TranslationsData } from "./types";
 
-let title: HTMLElement = document.getElementById("title")!;
-let paragraph1: HTMLElement = document.getElementById("paragraph1")!;
-let paragraph2: HTMLElement = document.getElementById("paragraph2")!;
-let selectedLang: HTMLElement = document.getElementById("selected-language")!;
+export default function initTranslator(translateData: TranslationsData) {
+  let languages: Language[] = Object.keys(
+    translateData[Object.keys(translateData)[0]]
+  );
+  let defaultLanguage: Language = navigator.language || "en-US";
+  defaultLanguage = defaultLanguage.replace("-", "_");
+  if (!languages.includes(defaultLanguage)) defaultLanguage = "en_US";
+  let translateOb = new TranslateObservable(defaultLanguage);
+  let elements: NodeListOf<HTMLElement> = document.querySelectorAll(
+    "[data-translatable]"
+  );
 
-let translateOb = new TranslateObservable("en");
-let s1 = new TranslateSubscriber(translateOb, title, translateData["title"]);
-let s2 = new TranslateSubscriber(
-  translateOb,
-  paragraph1,
-  translateData["paragraph1"]
-);
-let s3 = new TranslateSubscriber(
-  translateOb,
-  paragraph2,
-  translateData["paragraph2"]
-);
+  if (elements.length > 0) {
+    elements.forEach((element) => {
+      let key = element.getAttribute("data-translatable");
+      if (key) {
+        let subscriber = new TranslateSubscriber(
+          translateOb,
+          element,
+          translateData[key]
+        );
+        translateOb.attach(subscriber);
+      }
+    });
+  }
 
-let selector = new LanguageSelector(translateOb, selectedLang, languages);
-let buttons: HTMLCollection = document.getElementsByClassName("language-btn")!;
+  let selectorEl = document.getElementById("lang-selector");
 
-translateOb.attach(s1);
-translateOb.attach(s2);
-translateOb.attach(s3);
-translateOb.attach(selector);
+  if (selectorEl instanceof HTMLElement) {
+    let selector = new LanguageSelector(translateOb, selectorEl, languages);
+    translateOb.attach(selector);
+  }
 
-translateOb.notify();
-
-Array.from(buttons).forEach((button) => {
-  button?.addEventListener("click", (e: Event) => {
-    let element = e.target as HTMLInputElement;
-    translateOb.changeLanguage(element.value);
-  });
-});
+  translateOb.notify();
+}
